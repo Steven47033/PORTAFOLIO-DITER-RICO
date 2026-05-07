@@ -1,0 +1,655 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portafolio | Diter Rico</title>
+
+    <!-- Tipografía moderna -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            background: #020617;
+            color: #e5f0ff;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+            body::before {
+                content: "";
+                position: fixed;
+                inset: 0;
+                background: radial-gradient(circle at 20% 20%, rgba(59, 130, 246, .25), transparent 30%), radial-gradient(circle at 80% 10%, rgba(14, 165, 233, .18), transparent 28%), radial-gradient(circle at 50% 90%, rgba(37, 99, 235, .16), transparent 32%);
+                pointer-events: none;
+                z-index: -1;
+            }
+
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(2, 6, 23, .85);
+            backdrop-filter: blur(14px);
+            padding: 15px;
+            text-align: center;
+            z-index: 10;
+            border-bottom: 1px solid rgba(96, 165, 250, .2);
+        }
+
+            nav a {
+                color: #dbeafe;
+                text-decoration: none;
+                margin: 0 10px;
+                font-size: 14px;
+                font-weight: 500;
+                transition: .3s;
+            }
+
+                nav a:hover {
+                    color: #38bdf8;
+                    text-shadow: 0 0 12px rgba(56, 189, 248, .8);
+                }
+
+        header {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #020617, #07142f, #0f2f63, #020617);
+            position: relative;
+            overflow: hidden;
+        }
+
+            header::after {
+                content: "";
+                position: absolute;
+                width: 800px;
+                height: 800px;
+                background: linear-gradient(rgba(59, 130, 246, .12) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, .12) 1px, transparent 1px);
+                background-size: 45px 45px;
+                transform: rotate(20deg);
+                opacity: .35;
+                animation: moveGrid 18s linear infinite;
+            }
+
+        @keyframes moveGrid {
+            from {
+                transform: rotate(20deg) translateY(0);
+            }
+
+            to {
+                transform: rotate(20deg) translateY(45px);
+            }
+        }
+
+        .profile-photo {
+            width: 165px;
+            height: 165px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid rgba(147, 197, 253, .85);
+            box-shadow: 0 0 35px rgba(56, 189, 248, .65);
+            margin-bottom: 22px;
+            z-index: 1;
+            transition: .35s;
+        }
+
+            .profile-photo:hover {
+                transform: scale(1.06) rotate(2deg);
+                box-shadow: 0 0 50px rgba(96, 165, 250, .9);
+            }
+
+        header h1 {
+            font-size: clamp(42px, 7vw, 80px);
+            margin-bottom: 10px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #ffffff, #93c5fd, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            z-index: 1;
+        }
+
+        header p {
+            max-width: 760px;
+            font-size: 19px;
+            color: #dbeafe;
+            z-index: 1;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 26px;
+            background: linear-gradient(90deg, #2563eb, #0ea5e9);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: .3s;
+            box-shadow: 0 0 25px rgba(14, 165, 233, .35);
+            z-index: 1;
+        }
+
+            .btn:hover {
+                transform: translateY(-4px) scale(1.04);
+                box-shadow: 0 0 35px rgba(56, 189, 248, .7);
+            }
+
+        section {
+            padding: 75px 20px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        h2 {
+            font-size: 34px;
+            margin-bottom: 22px;
+            color: #bfdbfe;
+            text-shadow: 0 0 18px rgba(59, 130, 246, .45);
+        }
+
+        h3 {
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        p {
+            color: #cbd5e1;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: rgba(15, 23, 42, .82);
+            padding: 20px;
+            border-radius: 18px;
+            border: 1px solid rgba(96, 165, 250, .18);
+            box-shadow: 0 12px 35px rgba(0,0,0,.35);
+            transition: .35s;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .card::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(96, 165, 250, .18), transparent);
+                transition: .6s;
+            }
+
+            .card:hover::before {
+                left: 100%;
+            }
+
+            .card:hover {
+                transform: translateY(-8px);
+                border-color: rgba(56, 189, 248, .65);
+                box-shadow: 0 0 35px rgba(14, 165, 233, .28);
+            }
+
+        .placeholder {
+            height: 175px;
+            background: linear-gradient(135deg, #0f172a, #1e3a8a, #0284c7);
+            border-radius: 14px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #e0f2fe;
+            text-align: center;
+            padding: 10px;
+            border: 1px solid rgba(147, 197, 253, .25);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 14px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(147, 197, 253, .25);
+            transition: .3s;
+        }
+
+        .clickable-img {
+            cursor: pointer;
+        }
+
+            .clickable-img:hover {
+                transform: scale(1.03);
+                filter: brightness(1.15);
+                box-shadow: 0 0 22px rgba(56, 189, 248, .45);
+            }
+
+        .carousel-wrapper {
+            position: relative;
+        }
+
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            scroll-snap-type: x mandatory;
+            padding: 5px 5px 18px;
+            scroll-behavior: smooth;
+        }
+
+            .carousel .card {
+                min-width: 500px;
+                max-width: 500px;
+                scroll-snap-align: start;
+            }
+
+            .carousel::-webkit-scrollbar {
+                height: 8px;
+            }
+
+            .carousel::-webkit-scrollbar-track {
+                background: #0f172a;
+                border-radius: 20px;
+            }
+
+            .carousel::-webkit-scrollbar-thumb {
+                background: #2563eb;
+                border-radius: 20px;
+            }
+
+        .carousel-btn {
+            position: absolute;
+            top: 42%;
+            transform: translateY(-50%);
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 1px solid rgba(147, 197, 253, .45);
+            background: rgba(15, 23, 42, .9);
+            color: #e0f2fe;
+            font-size: 26px;
+            cursor: pointer;
+            z-index: 3;
+            transition: .3s;
+            box-shadow: 0 0 20px rgba(14, 165, 233, .25);
+        }
+
+            .carousel-btn:hover {
+                background: #2563eb;
+                box-shadow: 0 0 28px rgba(56, 189, 248, .75);
+                transform: translateY(-50%) scale(1.1);
+            }
+
+            .carousel-btn.left {
+                left: -10px;
+            }
+
+            .carousel-btn.right {
+                right: -10px;
+            }
+
+        iframe {
+            width: 100%;
+            height: 220px;
+            border: none;
+            border-radius: 14px;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(2, 6, 23, .95);
+            color: #94a3b8;
+            border-top: 1px solid rgba(96, 165, 250, .18);
+        }
+
+        .fade {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: .8s;
+        }
+
+            .fade.show {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        @media (max-width: 600px) {
+            nav a {
+                display: inline-block;
+                margin: 5px;
+            }
+
+            header p {
+                font-size: 16px;
+            }
+
+            .profile-photo {
+                width: 135px;
+                height: 135px;
+            }
+
+            .carousel-btn.left {
+                left: 5px;
+            }
+
+            .carousel-btn.right {
+                right: 5px;
+            }
+        }
+        .icon {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 18px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 34px;
+            background: linear-gradient(135deg, #1e3a8a, #0ea5e9);
+            box-shadow: 0 0 25px rgba(56, 189, 248, .35), inset 0 0 12px rgba(255,255,255,.1);
+            transition: .35s;
+        }
+
+        .card:hover .icon {
+            transform: rotate(-6deg) scale(1.08);
+            box-shadow: 0 0 35px rgba(56, 189, 248, .65), inset 0 0 18px rgba(255,255,255,.15);
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#inicio">Inicio</a>
+        <a href="#perfil">Perfil</a>
+        <a href="#trabajos">Trabajos</a>
+        <a href="#videos">Videos</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
+
+    <header id="inicio">
+        <!-- FOTO DE PERFIL: reemplaza imagenes/foto-perfil.jpg por tu foto real -->
+        <img src="img/yo1.png" alt="Foto de perfil de Diter Rico" class="profile-photo">
+
+        <h1>Diter Rico</h1>
+        <p>Diseñador multimedia y creador de contenido visual. Producción audiovisual, diseño gráfico, identidad de marca, piezas publicitarias y contenido fanmade de videojuegos.</p>
+        <a href="#trabajos" class="btn">Ver portafolio</a>
+    </header>
+
+    <section id="perfil" class="fade">
+        <h2>Quién soy</h2>
+        <p>Soy una persona responsable con capacidad de adaptarme a trabajar de manera grupal e individual, seguir indicaciones y rendir excelentemente a nivel laboral. Mis principales habilidades son en el ámbito de edición multimedia: videos, imágenes e ilustraciones. De esta forma, usando programas de edición como la suite de Adobe, Camtasia Studio y Sony Vegas.</p>
+    </section>
+
+    <section class="fade">
+        <h2>Perfil profesional</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="icon">🎨</div>
+                <h3>Diseño gráfico</h3>
+                <p>Piezas publicitarias, contenido para redes, banners, afiches y composiciones visuales.</p>
+            </div>
+            <div class="card">
+                <div class="icon">🎬</div>
+                <h3>Producción audiovisual</h3>
+                <p>Edición de video, reels, clips promocionales y contenido digital.</p>
+            </div>
+            <div class="card">
+                <div class="icon">🚀</div>
+                <h3>Identidad visual</h3>
+                <p>Logotipos, branding, paletas de color y diseño de marca.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="trabajos" class="fade">
+        <h2>Mis trabajos</h2>
+
+        <div class="carousel-wrapper">
+            <button class="carousel-btn left" onclick="moveCarousel('trabajosCarousel', -1)">‹</button>
+            <button class="carousel-btn right" onclick="moveCarousel('trabajosCarousel', 1)">›</button>
+
+            <div class="carousel" id="trabajosCarousel">
+                <div class="card">
+                    <!-- Al hacer clic en la imagen, cambia entre estas rutas -->
+                    <img src="img/Autoxua/Posters Licencias AutoXua_curso a2.jpg" alt="Pieza publicitaria" class="project-img clickable-img" data-images="img/Brinks/MailingHombreBrinks.jpg,img/Eco7/Piezaeco7.jpg,img/Illumi/Piezas Illumi Faros Ojos Angel.jpg">
+                    <h3>Piezas publicitarias</h3>
+                    <p>Diseños para redes, campañas, promociones y contenido digital.</p>
+                </div>
+
+                <div class="card">
+                    <img src="img/OILPC/OILPC 520 logo.jpg" alt="Diseño de logotipo" class="project-img clickable-img" data-images="img/OILPC/OILPC 520 logo.jpg,img/RBUU/LOGOS RBUU_01.jpg,img/Eco7/eco396logo_perf.jpg">
+                    <h3>Logotipos</h3>
+                    <p>Espacio para mostrar logos e identidad visual.</p>
+                </div>
+
+                <div class="card">
+                    <img src="imagenes/branding-1.jpg" alt="Identidad de marca" class="project-img clickable-img" data-images="imagenes/branding-1.jpg,imagenes/branding-2.jpg,imagenes/branding-3.jpg">
+                    <h3>Identidad de marca</h3>
+                    <p>Mockups, colores, tipografías y aplicaciones de marca.</p>
+                </div>
+
+                <div class="card">
+                    <img src="imagenes/fanmade-1.jpg" alt="Contenido fanmade videojuegos" class="project-img clickable-img" data-images="imagenes/fanmade-1.jpg,imagenes/fanmade-2.jpg,imagenes/fanmade-3.jpg">
+                    <h3>Fanmade videojuegos</h3>
+                    <p>Contenido creativo inspirado en videojuegos para YouTube.</p>
+                </div>
+
+                <div class="card">
+                    <img src="imagenes/proyecto-1.jpg" alt="Proyecto destacado" class="project-img clickable-img" data-images="imagenes/proyecto-1.jpg,imagenes/proyecto-2.jpg,imagenes/proyecto-3.jpg">
+                    <h3>Proyecto destacado</h3>
+                    <p>Aquí puedes agregar otro trabajo importante de tu portafolio.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="videos" class="fade">
+        <h2>Videos y YouTube</h2>
+
+        <div class="carousel-wrapper">
+            <button class="carousel-btn left" onclick="moveCarousel('videosCarousel', -1)">‹</button>
+            <button class="carousel-btn right" onclick="moveCarousel('videosCarousel', 1)">›</button>
+
+            <div class="carousel" id="videosCarousel">
+                <div class="card">
+                    <!-- Para YouTube cambia VIDEO_ID por el código del video -->
+                    <iframe src="https://www.youtube.com/embed/i0j1jGfAnUQ" title="Video de YouTube"></iframe>
+                    <h3>Canal de YouTube</h3>
+                    <p>Videojuegos, recreaciones fanmade, edición y diseño visual.</p>
+                    <a href="https://www.youtube.com/@iorijd" class="btn" target="_blank">Ver canal</a>
+                </div>
+
+                <div class="card">
+                    <div class="placeholder">Video reel / demo</div>
+                    <h3>Reel audiovisual</h3>
+                    <p>Reels y TikToks con edición profesional.</p>
+                </div>
+
+                <div class="card">
+                    <div class="placeholder">Miniatura YouTube</div>
+                    <h3>Miniaturas</h3>
+                    <p>Diseños visuales para contenido gaming o multimedia.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="fade">
+        <h2>Experiencia</h2>
+
+        <div class="grid">
+
+            <!-- BRINKS -->
+            <div class="card">
+                <div class="icon">🏢</div>
+
+                <h3>BRINKS DE COLOMBIA S.A</h3>
+
+                <p style="color:#60a5fa; font-weight:600; margin-bottom:10px;">
+                    Aprendiz de comunicaciones · 2022
+                </p>
+
+                <p style="margin-bottom:14px;">
+                    Desarrollo y apoyo de contenido corporativo y multimedia bajo lineamientos institucionales y comunicación interna.
+                </p>
+
+                <ul style="padding-left:18px; color:#cbd5e1;">
+                    <li>Desarrollo de contenido multimedia siguiendo lineamientos de marca.</li>
+                    <li>Envío y gestión de comunicados corporativos.</li>
+                    <li>Apoyo en campañas internas y eventos empresariales.</li>
+                </ul>
+
+                <p style="margin-top:15px; color:#93c5fd;">
+                    ⏳ Tiempo: 6 meses
+                </p>
+            </div>
+
+            <!-- ECO7 -->
+            <div class="card">
+                <div class="icon">🎨</div>
+
+                <h3>ECO7 396 SAS</h3>
+
+                <p style="color:#60a5fa; font-weight:600; margin-bottom:10px;">
+                    Diseñador gráfico y administrador de redes sociales · 2023 - 2025
+                </p>
+
+                <p style="margin-bottom:14px;">
+                    Desarrollo creativo y gestión de contenido digital enfocado en promoción empresarial y presencia visual.
+                </p>
+
+                <ul style="padding-left:18px; color:#cbd5e1;">
+                    <li>Diseño de piezas publicitarias y contenido multimedia.</li>
+                    <li>Gestión y administración de redes sociales.</li>
+                    <li>Creación de campañas visuales y promoción digital.</li>
+                    <li>Diseño de contenido visual para comunicación corporativa.</li>
+                </ul>
+                <p style="margin-top:15px; color:#93c5fd;">
+                    ⏳ Tiempo: 2 años
+                </p>
+            </div>
+
+            <!-- FREELANCER -->
+            <div class="card">
+                <div class="icon">🚀</div>
+
+                <h3>Trabajo Freelancer</h3>
+
+                <p style="color:#60a5fa; font-weight:600; margin-bottom:10px;">
+                    Diseñador multimedia independiente · 2025 - actualidad
+                </p>
+
+                <p style="margin-bottom:14px;">
+                    Desarrollo de proyectos visuales, branding y contenido digital para microempresas nacionales e internacionales.
+                </p>
+
+                <ul style="padding-left:18px; color:#cbd5e1;">
+                    <li>Diseño visual y contenido publicitario para OILPC 520 SAS.</li>
+                    <li>Desarrollo creativo y piezas gráficas para Illumi Transport (Costa Rica).</li>
+                    <li>Creación de identidad visual y contenido multimedia.</li>
+                    <li>Edición de video y diseño promocional para redes sociales.</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="contacto" class="fade">
+        <h2>Contacto</h2>
+        <p>Correo: diterstevenricoq48@gmail.com</p>
+        <p>Número de contacto: +57 3023779163</p>
+        <p> LinkedIn: Diter Rico</p>
+        <p>YouTube: youtube.com/@iorijd</p>
+    </section>
+
+    <footer>
+        <p>© 2026 Diter Rico | Portafolio Multimedia</p>
+    </footer>
+
+    <script>
+        const elements = document.querySelectorAll('.fade');
+
+        function showOnScroll() {
+            elements.forEach(el => {
+                const position = el.getBoundingClientRect().top;
+                const screenHeight = window.innerHeight;
+                if (position < screenHeight - 100) {
+                    el.classList.add('show');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', showOnScroll);
+        showOnScroll();
+
+        // Flechas de carrusel
+        function moveCarousel(id, direction) {
+            const carousel = document.getElementById(id);
+            const cardWidth = 305;
+            carousel.scrollBy({
+                left: cardWidth * direction,
+                behavior: 'smooth'
+            });
+        }
+
+        // Cambiar imagen al hacer clic sobre cada imagen del portafolio
+        const clickableImages = document.querySelectorAll('.clickable-img');
+
+        clickableImages.forEach(img => {
+            img.dataset.index = 0;
+
+            img.addEventListener('click', () => {
+                const images = img.dataset.images.split(',');
+                let currentIndex = Number(img.dataset.index);
+                currentIndex = (currentIndex + 1) % images.length;
+                img.dataset.index = currentIndex;
+                img.src = images[currentIndex].trim();
+            });
+        });
+
+        // Efecto 3D suave en tarjetas
+        const cards = document.querySelectorAll('.card');
+
+        cards.forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 18;
+                const rotateY = (centerX - x) / 18;
+                card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+
+</body>
+</html>
